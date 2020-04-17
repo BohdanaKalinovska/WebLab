@@ -69,7 +69,7 @@ function compare(arr, new_arr){
 	}
 
 	else
-		return false; //Різна довжина масивів тому False
+		return false; //Різна довжина масивів
 }
 
 function result(array1, array2, array3, array4, arr){
