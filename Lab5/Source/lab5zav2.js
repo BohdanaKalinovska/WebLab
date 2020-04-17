@@ -43,93 +43,64 @@ var new_array2 = [
 	["C","B","C"]
 ];
 
-function comparison(array, array1, array2, array3, array4){
-	var zm1 = 0;
-	var zm2 = 0;
-	var zm3 = 0;
-	var zm4 = 0;
 
-	//Перевіряємо тільки масив 1 і 2 
-	if(array[0].length == 2){
-		//Перевіряємо масив 1 
-		for(var i=0; i<array.length; i++){
-			for(var j=0; j<array[1].length; j++){
-				if(array[i][j] == array1[i][j]){
-					zm1 +=1;
-				}else{
-					break;
-				}
-			}
-		} 
-		//Перевіряємо масив 2
-		for(var i=0; i<array.length; i++){
-			for(var j=0; j<array[1].length; j++){
-				if(array[i][j] == array2[i][j]){
-					zm2 +=1;
-				}else{
-					break;
-				}
-			}
-		}
+function compare_length(arr, new_arr){
+	if(arr.length !== new_arr.length)
+		return false;
+	else
+		return true;
 
-		if (zm1 == array1.length * array1[1].length || zm2 == array2.length * array2[1].length) {
-			return true;
-		}else{
-			return false;
+}
+
+function compare(arr, new_arr){
+	var z = 0;
+	if(compare_length(arr, new_arr) == true){
+		for (var i=0; i<arr.length; i++){
+			for (var j=0; j<arr[1].length; j++){
+				if(arr[i][j] == new_arr[i][j])
+					z++;	
 		}
 	}
 
-	//Перевіряємо тільки масив 3 і 4 
-	if(array[0].length == 3){
-		//Перевіряємо масив 3 
-		for(var i=0; i<array.length; i++){
-			for(var j=0; j<array[1].length; j++){
-				if(array[i][j] == array3[i][j]){
-					zm3 +=1;
-				}else{
-					break;
-				}
-			}
-		} 
-		//Перевіряємо масив 4
-		for(var i=0; i<array.length; i++){
-			for(var j=0; j<array[1].length; j++){
-				if(array[i][j] == array4[i][j]){
-					zm4 +=1;
-				}else{
-					break;
-				}
-			}
-		}
-
-		if (zm3 == array3.length * array3[1].length || zm4 == array4.length * array4[1].length) {
-			return true;
-		}else{
-			return false;
-		}
+	if(z==(arr.length * arr[1].length))
+		return true;
+	else
+		return false;
 	}
 
-	if(array[0].length > 3){
-		return "Масив не співпадає, його не існує в базі";
-	}
+	else
+		return false; //Різна довжина масивів тому False
+}
 
+function result(array1, array2, array3, array4, arr){
+	if(compare(array1, arr) == true)
+		return "true - горизонтальний";
+	else if(compare(array2, arr) == true)
+		return "true - вертикальний";
+	else if(compare(array3, arr) == true)
+		return "true - діагональний зліва";
+	else if(compare(array4, arr) == true)
+		return "true - діагональний справа";
+	else
+		return "false - cпівпадінь не знайдено";
 }
 
 
 console.log("-------Завдання №2-------");
 console.log("Масив 1: ");
-console.log(new_array1[0][0] + "," + new_array1[0][1]);
-console.log(new_array1[1][0] + "," + new_array1[1][1]);
-console.log(new_array1[2][0] + "," + new_array1[2][1]);
+console.log('(' + '[' + new_array1[0][0] + "," + new_array1[0][1] + ']' + ',');
+console.log(' ' + '[' +new_array1[1][0] + "," + new_array1[1][1] + ']' + ',');
+console.log(' ' + '[' +new_array1[2][0] + "," + new_array1[2][1] + ']' + ')');
 
-console.log("Відповідь:" + comparison(new_array1, array1, array2, array3, array4));
+console.log("-> " + result(array1, array2, array3, array4, new_array1));
 
 console.log("Масив 2: ");
-console.log(new_array2[0][0] + "," + new_array2[0][1] + "," + new_array2[0][2]);
-console.log(new_array2[1][0] + "," + new_array2[1][1] + "," + new_array2[1][2]);
-console.log(new_array2[2][0] + "," + new_array2[2][1] + "," + new_array2[2][2]);
-console.log(new_array2[3][0] + "," + new_array2[3][1] + "," + new_array2[3][2]);
+console.log('(' + '[' + new_array2[0][0] + "," + new_array2[0][1] + "," + new_array2[0][2] + ']' + ',');
+console.log(' ' + '[' + new_array2[1][0] + "," + new_array2[1][1] + "," + new_array2[1][2] + ']' + ',');
+console.log(' ' + '[' + new_array2[2][0] + "," + new_array2[2][1] + "," + new_array2[2][2] + ']' + ',');
+console.log(' ' + '[' + new_array2[3][0] + "," + new_array2[3][1] + "," + new_array2[3][2] + ']' + ')');
 
-console.log("Відповідь:" + comparison(new_array2, array1, array2, array3, array4));
+console.log("-> " + result(array1, array2, array3, array4, new_array2));
 console.log(" ");
+
 

@@ -1,10 +1,23 @@
-var person = {
-	surname:"Kalinovska", //KLN
-	name:"Bohdana", //BDN
-	data:"6/1/2001", //01A46
-	gender:"female"
+var person_1 = {
+	surname:"Kalinovska", 
+	name:"Bohdana", 
+	data:"6/1/2001", 
+	gender:"F"
 };
 
+var person_2 = {
+	surname:"Elo", 
+	name:"Mark", 
+	data:"7/12/1986", 
+	gender:"M"
+};
+
+var person_3 = {
+	surname:"Yk", 
+	name:"Ik", 
+	data:"23/5/1992", 
+	gender:"F"
+};
 
 //Повертає слово без голосних букв
 function removeVowels(word){              
@@ -16,42 +29,54 @@ function removeConsonant(word){
     return word.replace(/[bcdfghjklmnpqrstvwxz]/gi, "");
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Фамілія
 
-//Дана функція рахує загальну кількість букв в фамілії і в залежності від вийнятку виводить 3 букви верхнього регістру
 function lenght_surname(word){
 	var new_surname = "";
-	//Якщо фамілія складається більше ніж з 3 приголосні удаляємо всі голосні записуємо тільки перші 3 приголосні (переводимо все в верхній регістр)
-	if(removeVowels(word).length > 4){
+	var len = 0;
+
+	//Якщо фамілія складається більше ніж з 3 приголосні або 3 приголосні, удаляємо всі голосні записуємо тільки перші 3 приголосні (переводимо все в верхній регістр)
+	if(removeVowels(word).length >= 3){
 		for(var i=0; i<3; i++){
 			new_surname +=removeVowels(word.toUpperCase())[i];
 		}
 		return new_surname;
 	}
 
-	//Якщо фамілія складається менш ніж з 3 приголосних: додаємо X поки букв не стане 3 (переводимо все в верхній регістр)
-	if(word.length <3){
-		new_surname=removeVowels(word.toUpperCase())+removeConsonant(word.toUpperCase());
-		for(var i=0; i<3; i++){
-			if(new_surname.length != 3){
-				new_surname += "X";
-			}else{
-				break;
-			}
+	//Якщо приголосних менше 3 + голосні в тому порядку
+	if(removeVowels(word).length < 3 && word.length >= 3){
+		new_surname = removeVowels(word.toUpperCase());
+		len = 3 - new_surname.length;
+		for(var i=0; i<len; i++){
+			new_surname += removeConsonant(word.toUpperCase())[i];
 		}
 		return new_surname;
 	}
 
-	//Якщо фамілія складається з 3 букв(як правило там має бути голосна): записуємо спочатку приголосні, а потім голосні (переводимо все в верхній регістр)
-	if(word.length ==3){
-		new_surname=removeVowels(word.toUpperCase())+removeConsonant(word.toUpperCase());
+	if(word.length < 3){
+		var z = "XXX";
+		len = 3 - word.length;
+		new_surname = word.toUpperCase();
+		for(var i = 0; i<len; i++){
+			new_surname += z[i];
+		}
 		return new_surname;
 	}
 }
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Ім'я
 
-
-//Дана функція рахує загальну кількість букв в імені і в залежності від вийнятку виводить 3 букви верхнього регістру
 function lenght_name(word){
 	var new_name = "";
+	var len = 0;
+
+	//Якщо ім'я складається з рівно з 3 приголосних то виводимо їх в тому ж порядку
+	if(removeVowels(word).length == 3){
+		new_name=removeVowels(word.toUpperCase());
+		return new_name;
+	}
+	
 	//Якщо ім'я складається більше ніж з 3 приголосні виводимо 1,3,4 (переводимо все в верхній регістр)
 	if(removeVowels(word).length > 3){
 		for(var i=0; i<4; i++){
@@ -64,32 +89,29 @@ function lenght_name(word){
 	}
 
 	//Якщо ім'я складається менш ніж з 3 приголосних: додаємо в кінець голосні (переводимо все в верхній регістр)
-	if(removeVowels(word).length <3){
-		for(var i=0; i<3; i++){
-			new_name +=(removeVowels(word.toUpperCase())+removeConsonant(word.toUpperCase()))[i] ;
+	if(removeVowels(word).length < 3 && word.length >= 3){
+		new_name = removeVowels(word.toUpperCase());
+		len = 3 - new_name.length;
+		for(var i=0; i<len; i++){
+			new_name += removeConsonant(word.toUpperCase())[i];
 		}
-		return new_name;
-	}
-
-	//Якщо ім'я складається з рівно з 3 приголосних то виводимо їх в тому ж порядку
-	if(removeVowels(word).length ==3){
-		new_name=removeVowels(word.toUpperCase());
 		return new_name;
 	}
 
 	//Якщо ім'я складається менше ніж з 3 букв то виводимо їх спочатку приголосні потім голосні і поки не стане 3 букви додаємо X (переводимо все в верхній регістр)
-	if(word.length <3){
-		new_name=removeVowels(word.toUpperCase)+removeConsonant(word.toUpperCase());
-		for(var i=0; i<3; i++){
-			if(new_name.length != 3){
-				new_name += "X";
-			}else{
-				break;
-			}
+	if(word.length < 3){
+		var z = "XXX";
+		new_name = removeVowels(word.toUpperCase()) + removeConsonant(word.toUpperCase());
+		len = 3 - new_name.length;
+		for(var i = 0; i<len; i++){
+			new_name += z[i];
 		}
 		return new_name;
 	}
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Дата і стать
 
 function data_division(data, gender){
 	var day ="";
@@ -103,13 +125,13 @@ function data_division(data, gender){
 	var new_day = "";
 
 	//Робота з днем
-	if(gender === "female"){
+	if(gender === "F"){
 		new_day=parseInt(day)+40; //parseInt - перетворює строку в число
 	}
-	if(gender === "male" && day < 10){
+	if(gender === "M" && day < 10){
 		new_day="0"+day;
 	}
-	if(gender === "male" && day >= 10){
+	if(gender === "M" && day >= 10){
 		new_day=day;
 	}
 
@@ -133,13 +155,31 @@ function data_division(data, gender){
 	return full_data; 
 
 }
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 console.log("-------Завдання №1-------");
-console.log("Person:");
-console.log("       "+"surname:" + person.surname);
-console.log("       "+"name:" + person.name);
-console.log("       "+"data:" + person.data);
-console.log("       "+"gender:" + person.gender);
+console.log("Person_1:");
+console.log("       "+"surname:" + person_1.surname);
+console.log("       "+"name:" + person_1.name);
+console.log("       "+"data:" + person_1.data);
+console.log("       "+"gender:" + person_1.gender);
 console.log("Ідентифікаційний код:");
-console.log(lenght_surname(person.surname) + lenght_name(person.name) + data_division(person.data, person.gender));
+console.log( lenght_surname(person_1.surname) + lenght_name(person_1.name) + data_division(person_1.data, person_1.gender));
 console.log(" ");
 
+console.log("Person_2:");
+console.log("       "+"surname:" + person_2.surname);
+console.log("       "+"name:" + person_2.name);
+console.log("       "+"data:" + person_2.data);
+console.log("       "+"gender:" + person_2.gender);
+console.log("Ідентифікаційний код:");
+console.log(lenght_surname(person_2.surname) + lenght_name(person_2.name) + data_division(person_2.data, person_2.gender));
+console.log(" ");
+
+console.log("Person_3:");
+console.log("       "+"surname:" + person_3.surname);
+console.log("       "+"name:" + person_3.name);
+console.log("       "+"data:" + person_3.data);
+console.log("       "+"gender:" + person_3.gender);
+console.log("Ідентифікаційний код:");
+console.log(lenght_surname(person_3.surname) + lenght_name(person_3.name) + data_division(person_3.data, person_3.gender));
+console.log(" ");
