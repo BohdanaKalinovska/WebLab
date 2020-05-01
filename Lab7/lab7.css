@@ -67,7 +67,7 @@ p8{
 	padding-bottom: 210px;
 }
 
-.bottom_check .color1{
+.container .button_form{
 	color: #017dfb;
 	padding-right:0px;
 	background:linear-gradient(to top,#ffffff ,#ffffff);
@@ -100,7 +100,6 @@ p9{
 	flex-wrap: nowrap;
 }
 
-.container,
 .check_in,
 .check_out,
 .rooms,
